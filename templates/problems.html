@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Problems</title>
+
+{% macro q_out(q_param, sign) %}
+    {% if q_param %}
+    <ol>
+        {% for k, v in q_param.items()%}
+            <li>&nbsp;&nbsp;&nbsp;{{k[0]}}<br>
+            {{sign }}&nbsp;{{k[1]}}<br><hr size="5" width="60" align="left">
+            {% if var_ans == 1%}
+                {{v}}<hr size="4" width="60" align="left"></li></li>
+            {% else %}
+                <br><hr size="4" width="60" align="left"></li></li>
+            {% endif %}
+
+        {% endfor %}
+     </ol>
+    {% endif %}
+{% endmacro %}
+</head>
+<body>
+<div id="output" name="output">
+    <h2>Additions</h2>
+        {{ q_out(q_add,"+") }}
+     </ol>
+
+    <h2>Subtractions</h2>
+     {{ q_out(q_sub,"-") }}<br><br>
+
+    <h2>Multiplications</h2>
+     {{ q_out(q_mul,"x") }}<br><br>
+
+    <h2>Divisions</h2>
+     {{ q_out(q_div, "%") }}<br><br>
+
+
+
+</div>
+<a href="/show_ans"> <button type="button" onclick="#" id="ans" name="ans">Show Answers</button> </a>
+</body>
+</html>
