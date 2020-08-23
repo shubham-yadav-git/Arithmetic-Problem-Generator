@@ -1,10 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import random as rn
 
 app = Flask(__name__)
 
 ans = 0
-
 
 @app.route('/')
 def home():
@@ -52,6 +51,22 @@ def gen_div(no_of_div=0):
         ans_div[(op1, op2)] = ("Quotient="+str(round(quo, 2)
                                                ),"Remainder="+ str(rem))
     return ans_div
+
+
+@app.route('/api', methods=["POST"])
+def prob_gen_api():
+    add = int(request.args.get("add"))
+    sub = int(request.args.get("sub"))
+    mul = int(request.args.get("mul"))
+    div = int(request.args.get("div"))
+
+    p_add = gen_add(int(add))
+    p_sub = gen_sub(int(sub))
+    p_mul = gen_mul(int(mul))
+    p_div = gen_div(int(div))
+
+    # {add: p_add, sub: p_sub, mul: p_mul, div: p_div}
+    return jsonify({"add": str(p_add), "sub": str(p_sub), "mul": str(p_mul), "div": str(p_div)})
 
 
 @app.route('/generator', methods=["GET", "POST"])
