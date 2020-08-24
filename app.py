@@ -48,7 +48,7 @@ def gen_div(no_of_div=0):
     return ans_div
 
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 def home():
     return render_template("index.html")
 
