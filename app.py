@@ -48,12 +48,12 @@ def gen_div(no_of_div=0):
     return ans_div
 
 
-@app.route('/', methods=["GET", "POST"])
+@app.route('/')
 def home():
     return render_template("index.html")
 
 
-@app.route('/api', methods=["POST"])
+@app.route('/api', methods=["POST", "GET"])
 def prob_gen_api():
     add = int(request.args.get("add"))
     sub = int(request.args.get("sub"))
@@ -91,4 +91,4 @@ def generator():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
