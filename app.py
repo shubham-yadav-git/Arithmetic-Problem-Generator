@@ -5,10 +5,6 @@ app = Flask(__name__)
 
 ans = 0
 
-@app.route('/')
-def home():
-    return render_template("index.html")
-
 
 def gen_add(no_of_add=0):
     ans_add = {}
@@ -48,9 +44,13 @@ def gen_div(no_of_div=0):
         quo = op1 / op2
         # round(quo, 2)
         rem = op1 % op2
-        ans_div[(op1, op2)] = ("Quotient="+str(round(quo, 2)
-                                               ),"Remainder="+ str(rem))
+        ans_div[(op1, op2)] = ("Quotient="+str(round(quo, 2)), "Remainder=" + str(rem))
     return ans_div
+
+
+@app.route('/')
+def home():
+    return render_template("index.html")
 
 
 @app.route('/api', methods=["POST"])
@@ -88,7 +88,6 @@ def generator():
         ans_mul) + "\nDivision:\n" + str(ans_div))
     f.close()
     return render_template("index.html", q_add=ans_add, q_sub=ans_sub, q_mul=ans_mul, q_div=ans_div)
-
 
 
 if __name__ == '__main__':
